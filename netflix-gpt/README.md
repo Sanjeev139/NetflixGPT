@@ -4,6 +4,24 @@
 Node Js - v20.11.1
 Tailwind CSS
 
+# Build Process
+- Create React App
+- Configured Tailwind CSS
+- Header
+- Routing of App
+- Login Form
+- Sign Up Form
+- Form Validation
+- useRef hook
+- Firebase Setup
+- Deploying Our app to production
+- Crate SignUp Account
+- Implement Sign In API
+- Create redux store with userSlice
+- Implemented Sign Out
+- Update Profile
+
+
 # Features Built
     - Login/SignUp 
         - SignIn/SignUp form
