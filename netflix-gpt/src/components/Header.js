@@ -4,12 +4,16 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleSearchBar } from "../utils/searchSlice";
+import { SUPPORTED_LANGUAGE } from "../utils/constant";
+import { changeLanguage } from "../utils/appConfigSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispacth = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const toggleSearch = useSelector(store => store.search.toggleSearch);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,6 +46,14 @@ const Header = () => {
       });
   };
 
+  const hadnleSearchButton = () => {
+    dispacth(toggleSearchBar(!toggleSearch))
+  }
+
+  const handleChangeLanguage = (e) => {
+    dispacth(changeLanguage(e.target.value))
+  }
+
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between">
       <img
@@ -50,7 +62,14 @@ const Header = () => {
         alt="logo"
       ></img>
       {user && 
-      <div className="flex">
+      <div className="flex p-2">
+        { toggleSearch && (<select className="p-4 m-4" onChange={handleChangeLanguage}>
+          {
+            SUPPORTED_LANGUAGE.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)
+          }
+        </select>)
+        }
+        <button className="bg-red-600 text-white rounded-lg p-4 m-4 cursor-pointer" onClick={hadnleSearchButton}>{toggleSearch ? "Home Page" : "Search Movies"}</button>
         <img
           alt="userLogo"
           className="w-20 p-3 text-red-700 flex justify-between"

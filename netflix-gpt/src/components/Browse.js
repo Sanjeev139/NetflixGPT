@@ -5,8 +5,13 @@ import SecondaryContainer from './SecondaryContainer';
 import usePopularMovies from '../hooks/usePopularMovies';
 import useTopRatedMovies from '../hooks/useTopRatedMovies';
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
+import { useSelector } from 'react-redux';
+import Search from './Search';
 
 const Browse = () => {
+
+  const toggleSearch = useSelector(store => store.search.toggleSearch);
+  console.log(toggleSearch)
 
   useNowPlayingMovies();
   usePopularMovies();
@@ -16,8 +21,17 @@ const Browse = () => {
   return (
       <div>
         <Header></Header>
-        <MainContainer></MainContainer>
+        {
+          toggleSearch &&
+            <Search></Search>
+        }{
+          !toggleSearch && 
+          <>
+          <MainContainer></MainContainer>
         <SecondaryContainer></SecondaryContainer>
+          </>
+
+        }
       </div>
   )
 }
