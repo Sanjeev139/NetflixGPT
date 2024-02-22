@@ -20,4 +20,4 @@ export const API_Options = {
       name: "Spanish"
     }
   ]
-  export const OPEN_API_KEY = "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";
+  export const OPEN_API_KEY = "";
